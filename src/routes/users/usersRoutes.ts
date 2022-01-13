@@ -1,27 +1,23 @@
 import { Request, Response, Router } from "express";
 
-import { User } from "../../model/User";
 import { UsersRepository } from "../../repositories/UsersRepository";
+import { CreateUserService } from "../../services/user/CreateUserService";
 
 const usersRoutes = Router();
 const usersRepository = new UsersRepository();
 
-usersRoutes.get("/", async (request, response) => {
+usersRoutes.get("/", async (request: Request, response: Response) => {
     const all = usersRepository.list();
 
     return response.json(all);
 });
 
-usersRoutes.post("/", async (request, response) => {
+usersRoutes.post("/", async (request: Request, response: Response) => {
     const { name, email, password } = request.body;
 
-    const userEmailAlreadyExists = usersRepository.findByEmail(email);
+    const createUserService = new CreateUserService(usersRepository);
 
-    if (userEmailAlreadyExists) {
-        return response.status(422).json({ message: "The email provided is already in use." })
-    }
-
-    usersRepository.create({ name, email, password })
+    createUserService.execute({ name, email, password });
 
     return response.status(201).send();
 });
