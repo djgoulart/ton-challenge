@@ -1,4 +1,4 @@
-import { IUsersRepository } from "./../repositories/IUsersRepository";
+import { IUsersRepository } from "../../repositories/contracts/IUsersRepository";
 
 interface IRequest {
     name: string;
@@ -6,8 +6,7 @@ interface IRequest {
     password: string;
 }
 
-class CreateUserService {
-
+class CreateUserUseCase {
     constructor(private usersRepository: IUsersRepository) { }
 
     execute({ name, email, password }: IRequest): void {
@@ -17,8 +16,8 @@ class CreateUserService {
             throw new Error("The email provided is already in use.");
         }
 
-        this.usersRepository.create({ name, email, password })
+        this.usersRepository.create({ name, email, password });
     }
 }
 
-export { CreateUserService };
+export { CreateUserUseCase };
