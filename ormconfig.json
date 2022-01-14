@@ -4,5 +4,14 @@
   "host": "localhost",
   "username": "docker",
   "password": "challenge",
-  "database": "ton_api"
+  "database": "ton_api",
+  "migrations": [
+    "./src/database/migrations/*.ts"
+  ],
+  "entities": [
+    "./src/modules/account/entities/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
 }

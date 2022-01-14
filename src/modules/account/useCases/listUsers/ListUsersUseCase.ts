@@ -1,14 +1,14 @@
-import { User } from "../../model/User";
+import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/contracts/IUsersRepository";
 
 class ListUsersUseCase {
-    constructor(private usersRepository: IUsersRepository) { }
+  constructor(private usersRepository: IUsersRepository) { }
 
-    execute(): User[] {
-        const users = this.usersRepository.list();
+  async execute(): Promise<User[]> {
+    const users = await this.usersRepository.list();
 
-        return users;
-    }
+    return users;
+  }
 }
 
 export { ListUsersUseCase };
