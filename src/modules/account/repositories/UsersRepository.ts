@@ -1,50 +1,44 @@
-import { User } from "./../model/User";
+import { getRepository, Repository } from "typeorm";
+import { hash } from "bcrypt";
+
+import { User } from "../entities/User";
 import { ICreateUserDTO, IUsersRepository } from "./contracts/IUsersRepository";
 
+
 class UsersRepository implements IUsersRepository {
+  private repository: Repository<User>;
 
-    private users: User[];
+  constructor() {
+    this.repository = getRepository(User);
+  }
 
-    private static INSTANCE: UsersRepository;
+  async create({ name, email, password }: ICreateUserDTO): Promise<void> {
+    const user = this.repository.create({
+      name,
+      email,
+      password: await hash(password, 10)
+    });
 
-    private constructor() {
-        this.users = [];
-    }
+    await this.repository.save(user)
+  }
 
-    public static getInstance(): UsersRepository {
-        if (!UsersRepository.INSTANCE) {
-            UsersRepository.INSTANCE = new UsersRepository();
-        }
+  async list(): Promise<User[]> {
+    const users = await this.repository.find();
 
-        return UsersRepository.INSTANCE;
-    }
+    return users;
+  }
 
-    create({ name, email, password }: ICreateUserDTO): void {
-        const user = new User();
+  async findById(id: string): Promise<User> {
+    const user = await this.repository.findOne(id);
 
-        Object.assign(user, {
-            name,
-            email,
-            password,
-            created_at: new Date()
-        });
+    return user;
+  }
 
-        this.users.push(user);
-    }
+  async findByEmail(email: string): Promise<User> {
+    const user = await this.repository.findOne({ email });
 
-    list(): User[] {
-        return this.users;
-    }
-
-    findById(id: string) {
-        const user = this.users.find(user => user.id === id);
-        return user;
-    }
-
-    findByEmail(email: string) {
-        const user = this.users.find(user => user.email === email);
-        return user;
-    }
+    return user;
+  }
 
 }
 
