@@ -1,0 +1,51 @@
+import { getRepository, Repository, UpdateResult } from "typeorm";
+
+import { Counter } from "../entities/Counter";
+import { ICreateCounterDTO, IUpdateCounterDTO, ICountersRepository } from "./contracts/ICountersRepository";
+
+
+class CountersRepository implements ICountersRepository {
+  private repository: Repository<Counter>;
+
+  constructor() {
+    this.repository = getRepository(Counter);
+  }
+
+  async create({ id, namespace, hits }: ICreateCounterDTO): Promise<Counter> {
+    const counter = this.repository.create({
+      id,
+      namespace,
+      hits
+    });
+
+    const newCounter = await this.repository.save(counter)
+
+    return newCounter;
+  }
+
+  async update({ id, hits }: IUpdateCounterDTO): Promise<UpdateResult> {
+    const updateCounter = await this.repository.update(id, { hits });
+
+    return updateCounter;
+  }
+
+  async list(): Promise<Counter[]> {
+    const counters = await this.repository.find();
+
+    return counters;
+  }
+
+  async findById(id: string): Promise<Counter> {
+    const counter = await this.repository.findOne(id);
+
+    return counter;
+  }
+
+  async findByNamespace(namespace: string): Promise<Counter> {
+    const counter = await this.repository.findOne({ namespace });
+
+    return counter;
+  }
+}
+
+export { CountersRepository }
