@@ -1,8 +1,8 @@
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Repository, UpdateResult } from "typeorm";
 import { hash } from "bcrypt";
 
 import { User } from "../entities/User";
-import { ICreateUserDTO, IUsersRepository } from "./contracts/IUsersRepository";
+import { ICreateUserDTO, IUpdateUserDTO, IUsersRepository } from "./contracts/IUsersRepository";
 
 
 class UsersRepository implements IUsersRepository {
@@ -23,6 +23,13 @@ class UsersRepository implements IUsersRepository {
     });
 
     await this.repository.save(user)
+  }
+
+  async update({ id, name, email, password }: IUpdateUserDTO): Promise<UpdateResult> {
+    const userUpdated = await this.repository.update(id, { name, email, password });
+
+    return userUpdated;
+
   }
 
   async list(): Promise<User[]> {
