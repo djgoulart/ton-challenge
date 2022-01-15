@@ -3,6 +3,7 @@ import { Router } from "express";
 import { ListUsersController } from "../modules/account/useCases/listUsers/ListUsersController";
 import { CreateUserController } from "../modules/account/useCases/createUser/CreateUserController";
 import { UpdateUserController } from "../modules/account/useCases/updateUser/UpdateUserController";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const usersRoutes = Router();
 
@@ -12,6 +13,6 @@ const listUsersController = new ListUsersController();
 
 usersRoutes.get("/", listUsersController.handle);
 usersRoutes.post("/", createUserController.handle);
-usersRoutes.put("/:id", updateUserController.handle);
+usersRoutes.put("/:id", ensureAuthenticated, updateUserController.handle);
 
 export { usersRoutes };
