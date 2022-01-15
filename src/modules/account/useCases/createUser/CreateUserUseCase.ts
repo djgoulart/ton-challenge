@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/AppError";
 
 import { IUsersRepository } from "../../repositories/contracts/IUsersRepository";
 
@@ -19,7 +20,7 @@ class CreateUserUseCase {
     const userEmailAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userEmailAlreadyExists) {
-      throw new Error("The email provided is already in use.");
+      throw new AppError("The email provided is already in use.", 422);
     }
 
     await this.usersRepository.create({ name, email, password });
