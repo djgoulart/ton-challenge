@@ -40,7 +40,7 @@ class AuthenticateUserUseCase {
       throw new AppError("Email or password incorrect", 401);
     }
 
-    const jwtToken = sign({}, process.env.APP_KEY, {
+    const jwtToken = sign({}, '021a57e796560de0a798d1feeb45c8fb76d67503', {
       subject: user.id,
       expiresIn: "1d"
     });

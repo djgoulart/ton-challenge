@@ -14,7 +14,7 @@ interface IUsersRepository {
   findByEmail(email: string): Promise<User>;
   list(): Promise<User[]>;
   create({ name, email, password }: ICreateUserDTO): Promise<void>;
-  update({ id, name, email, password }: IUpdateUserDTO): Promise<UpdateResult>;
+  update({ id, name, email, password }: IUpdateUserDTO): Promise<void>;
 }
 
 export { IUsersRepository, ICreateUserDTO, IUpdateUserDTO }

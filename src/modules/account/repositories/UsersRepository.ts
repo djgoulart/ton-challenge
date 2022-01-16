@@ -25,10 +25,8 @@ class UsersRepository implements IUsersRepository {
     await this.repository.save(user)
   }
 
-  async update({ id, name, email, password }: IUpdateUserDTO): Promise<UpdateResult> {
-    const userUpdated = await this.repository.update(id, { name, email, password });
-
-    return userUpdated;
+  async update({ id, name, email, password }: IUpdateUserDTO): Promise<void> {
+    await this.repository.update(id, { name, email, password });
 
   }
 
