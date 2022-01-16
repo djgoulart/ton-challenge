@@ -1,8 +1,8 @@
-import { getRepository, Repository, UpdateResult } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 import { hash } from "bcrypt";
 
-import { User } from "../entities/User";
-import { ICreateUserDTO, IUpdateUserDTO, IUsersRepository } from "./contracts/IUsersRepository";
+import { User } from "@modules/account/infra/typeorm/entities/User";
+import { ICreateUserDTO, IUpdateUserDTO, IUsersRepository } from "@modules/account/repositories/IUsersRepository";
 
 
 class UsersRepository implements IUsersRepository {

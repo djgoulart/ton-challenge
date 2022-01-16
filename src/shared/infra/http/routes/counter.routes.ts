@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { ViewCounterController } from "../modules/hits/useCases/viewCounter/ViewCounterController";
-import { CreateCounterController } from "../modules/hits/useCases/createCounter/CreateCounterController";
-import { UpdateCounterController } from "../modules/hits/useCases/updateCounter/UpdateCounterController";
+import { ViewCounterController } from "@modules/hits/useCases/viewCounter/ViewCounterController";
+import { CreateCounterController } from "@modules/hits/useCases/createCounter/CreateCounterController";
+import { UpdateCounterController } from "@modules/hits/useCases/updateCounter/UpdateCounterController";
 
 const counterRoutes = Router();
 

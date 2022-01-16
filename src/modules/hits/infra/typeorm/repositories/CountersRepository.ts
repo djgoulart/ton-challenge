@@ -1,7 +1,11 @@
 import { getRepository, Repository, UpdateResult } from "typeorm";
 
-import { Counter } from "../entities/Counter";
-import { ICreateCounterDTO, IUpdateCounterDTO, ICountersRepository } from "./contracts/ICountersRepository";
+import { Counter } from "@modules/hits/infra/typeorm/entities/Counter";
+import {
+  ICreateCounterDTO,
+  IUpdateCounterDTO,
+  ICountersRepository
+} from "@modules/hits/repositories/ICountersRepository";
 
 
 class CountersRepository implements ICountersRepository {

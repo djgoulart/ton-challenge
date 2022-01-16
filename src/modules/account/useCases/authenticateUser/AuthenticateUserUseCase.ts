@@ -1,9 +1,9 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppError";
 
-import { IUsersRepository } from "../../repositories/contracts/IUsersRepository";
+import { AppError } from "@shared/errors/AppError";
+import { IUsersRepository } from "@modules/account/repositories/IUsersRepository";
 
 
 interface IRequest {
@@ -40,7 +40,7 @@ class AuthenticateUserUseCase {
       throw new AppError("Email or password incorrect", 401);
     }
 
-    const jwtToken = sign({}, '021a57e796560de0a798d1feeb45c8fb76d67503', {
+    const jwtToken = sign({}, `${process.env.APP_KEY}`, {
       subject: user.id,
       expiresIn: "1d"
     });

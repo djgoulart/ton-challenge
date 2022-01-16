@@ -1,5 +1,6 @@
-import { Counter } from "../../entities/Counter";
 import { UpdateResult } from "typeorm";
+
+import { Counter } from "@modules/hits/infra/typeorm/entities/Counter";
 
 interface ICreateCounterDTO {
   id: string;

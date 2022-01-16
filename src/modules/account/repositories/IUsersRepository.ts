@@ -1,6 +1,5 @@
-import { User } from "../../entities/User";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { UpdateResult } from "typeorm";
+import { User } from "@modules/account/infra/typeorm/entities/User";
+import { ICreateUserDTO } from "@modules/account/dtos/ICreateUserDTO";
 
 interface IUpdateUserDTO {
   id: string;
