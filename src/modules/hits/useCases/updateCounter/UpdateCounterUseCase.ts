@@ -1,9 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppError";
-import { ICountersRepository } from "../../repositories/contracts/ICountersRepository";
-import { countApi } from "../../../../services/CountApi";
-import { Counter } from "../../entities/Counter";
-import { UpdateResult } from "typeorm";
+
+import { AppError } from "@shared/errors/AppError";
+import { ICountersRepository } from "@modules/hits/repositories/ICountersRepository";
+import { countApi } from "@shared/infra/services/CountApi";
 
 interface IUpdateCounter {
   id: string;

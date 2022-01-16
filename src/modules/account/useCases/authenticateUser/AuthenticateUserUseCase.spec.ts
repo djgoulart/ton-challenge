@@ -1,7 +1,7 @@
-import { AppError } from "../../../../errors/AppError";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { InMemoryUsersRepository } from "../../repositories/inMemory/InMemoryUsersRepository";
-import { CreateUserUseCase } from "./../createUser/CreateUserUseCase";
+import { AppError } from "@shared/errors/AppError";
+import { ICreateUserDTO } from "@modules/account/dtos/ICreateUserDTO";
+import { InMemoryUsersRepository } from "@modules/account/repositories/inMemory/InMemoryUsersRepository";
+import { CreateUserUseCase } from "@modules/account/useCases/createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
@@ -9,8 +9,8 @@ let createUserUseCase: CreateUserUseCase;
 let inMemoryUsersRepository: InMemoryUsersRepository;
 
 describe("Authenticate User", () => {
+
   beforeEach(() => {
-    process.env.APP_KEY = 'b57c9031cea3db204024cebdd3b00ed3bac0ccbd';
     inMemoryUsersRepository = new InMemoryUsersRepository();
     createUserUseCase = new CreateUserUseCase(inMemoryUsersRepository);
     authenticateUserUseCase = new AuthenticateUserUseCase(inMemoryUsersRepository);
@@ -62,5 +62,6 @@ describe("Authenticate User", () => {
         password: 'invalidpassword'
       });
     }).rejects.toBeInstanceOf(AppError);
+
   });
 });

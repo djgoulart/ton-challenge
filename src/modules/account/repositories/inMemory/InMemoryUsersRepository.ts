@@ -1,8 +1,7 @@
 import { hash } from "bcrypt";
-import { UpdateResult } from "typeorm";
 
-import { User } from "../../entities/User";
-import { ICreateUserDTO, IUpdateUserDTO, IUsersRepository } from "../contracts/IUsersRepository";
+import { User } from "@modules/account/infra/typeorm/entities/User";
+import { ICreateUserDTO, IUpdateUserDTO, IUsersRepository } from "../IUsersRepository";
 
 
 class InMemoryUsersRepository implements IUsersRepository {

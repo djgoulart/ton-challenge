@@ -1,5 +1,5 @@
-import { AppError } from "../../../../errors/AppError";
-import { InMemoryUsersRepository } from "../../repositories/inMemory/InMemoryUsersRepository";
+import { AppError } from "@shared/errors/AppError";
+import { InMemoryUsersRepository } from "@modules/account/repositories/inMemory/InMemoryUsersRepository";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 let createUserUseCase: CreateUserUseCase;
