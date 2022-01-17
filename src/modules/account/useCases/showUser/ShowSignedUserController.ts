@@ -12,6 +12,7 @@ class ShowSignedUserController {
 
     const id = request.user_id;
     const user = await showUserByIdUseCase.execute(id);
+    delete user.password;
 
     return response.json(user);
   }
