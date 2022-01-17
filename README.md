@@ -12,7 +12,7 @@
 
 ## Acesse a Documentação da API
 
-<a href="http://shorturl.at/itvyL" target="_blank"><STRONG>DOCUMENTAÇÃO DA API</STRONG></a>
+<a href="http://18.228.30.102/api-docs/" target="__blank"><STRONG>DOCUMENTAÇÃO DA API</STRONG></a>
 
 <br>
 
@@ -30,11 +30,14 @@ Todos os detalhes do desafio estão disponíveis [AQUI](DESAFIO.md), e as princi
 ## 💻 Sobre o Projeto
 
 * O projeto foi desenvolvido usando `NODEJS`, `TYPESCRIPT` e `POSTGRES`.
-* Na arquitetura, a ideia foi manter as regras de negócio desacoplatas de outras camadas da aplicação <br>
-de maneira que pudessem ser portáveis.
-* Na camada de Infra, o TYPEORM está configurado como ORM padrão, mas pode ser facilmente subistituido <br>
+* Na arquitetura, a idéia foi manter as regras de negócio desacoplatas de outras camadas da aplicação <br>
+de maneira que pudessem ser reutilizadas num cenário de expansão do projeto.
+* Na camada de Infra, o TYPEORM está configurado como ORM padrão, mas pode ser facilmente subistituído <br>
 graças ao baixo acoplamento da camada de Negócios.
-* Foram realizados testes unitários para os `Casos de Uso` e teste de integração para os `Controllers`
+* Foram realizados testes unitários para os `Casos de Uso` e testes de integração para os `Controllers`
+* Dentro do que foi proposto, tentei manter boas práticas como `Clean Code`, `Conventional Commits`, além disso
+também tentei manter o código alinhado com os princípios de `SOLID`.
+* A documentação da API foi feita usando `Swagger`.
 
 <br>
 
@@ -65,7 +68,7 @@ APP_KEY=<sua_chave_de_criptografia>
 ## ☕ Criando a estrutura do banco de dados
 
 Rode as migrations para fazer a criação inicial das tabelas.
-Lembre-se, sua instância de banco de dado precisa estar rodando nessa etapa.
+Lembre-se, sua conexão com o banco de dados precisa estar configurada nesta etapa.
 
 ```
 `npm run typeorm migrations:run` ou `yarn typeorm migrations:run`
@@ -99,7 +102,7 @@ Para rodar o projeto a partir dos arquivos de build, atente-se para a correta co
 ## Rodando o Projeto a partir em ambiente de desenvolvimento
 
 <br>
-Abra um terminal de comando dentro da raiz do projeto e digite o comando abaixo:
+Abra um terminal de linha comandos dentro da raiz do projeto e digite o comando abaixo:
 
 ```
 npm run dev
@@ -126,7 +129,7 @@ Para rodar o projeto `em ambiente de desenvolvimento`, atente-se para a correta 
 
 ## ☕ Rodando Testes
 
-Para rodar os testes após se certificar das que seu arquivo `ormconfig.json` está corretamente configurado para o `ambiente de desenvolvimento` use o comando:
+Para rodar os testes após se certificar que seu arquivo `ormconfig.json` está corretamente configurado para o `ambiente de desenvolvimento` use o comando:
 
 ```
 `npm run test` ou `yarn test`
