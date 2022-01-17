@@ -18,6 +18,100 @@
     }
   },
   "paths": {
+    "/sessions": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Authenticate User",
+        "description": "Generates a JWT TOKEN",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "required": true,
+                    "example": "user@email.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": true,
+                    "example": "user_password"
+                  }
+                },
+                "example": {
+                  "email": "jhon@mail.com",
+                  "password": "123123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "User": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The email or password is invalid."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unexpected error occurred on the server"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "tags": [
@@ -459,24 +553,7 @@
         ],
         "summary": "Show Counter",
         "description": "Show a counter",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "namespace": {
-                    "type": "string",
-                    "example": "my.namespace.com"
-                  }
-                },
-                "example": {
-                  "namespace": "my.namespace.com"
-                }
-              }
-            }
-          }
-        },
+        "requestBody": {},
         "responses": {
           "200": {
             "description": "Success",
@@ -564,24 +641,7 @@
         ],
         "summary": "Update Counter",
         "description": "Increase a counter hits by 1",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "namespace": {
-                    "type": "string",
-                    "example": "my.namespace.com"
-                  }
-                },
-                "example": {
-                  "namespace": "my.namespace.com"
-                }
-              }
-            }
-          }
-        },
+        "requestBody": {},
         "responses": {
           "200": {
             "description": "Success",
