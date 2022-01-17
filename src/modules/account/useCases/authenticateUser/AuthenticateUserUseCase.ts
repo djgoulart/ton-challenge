@@ -27,7 +27,6 @@ class AuthenticateUserUseCase {
   ) { }
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
-
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
@@ -35,7 +34,6 @@ class AuthenticateUserUseCase {
     }
 
     const passwordMatch = await compare(password, user.password);
-
     if (!passwordMatch) {
       throw new AppError("Email or password incorrect", 401);
     }

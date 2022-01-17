@@ -61,7 +61,7 @@ describe("Authenticate User", () => {
         email: userData.email,
         password: 'invalidpassword'
       });
-    }).rejects.toBeInstanceOf(AppError);
 
+    }).rejects.toBeInstanceOf(AppError);
   });
 });

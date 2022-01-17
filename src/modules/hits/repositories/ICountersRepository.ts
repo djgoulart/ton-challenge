@@ -1,5 +1,3 @@
-import { UpdateResult } from "typeorm";
-
 import { Counter } from "@modules/hits/infra/typeorm/entities/Counter";
 
 interface ICreateCounterDTO {
@@ -18,7 +16,7 @@ interface ICountersRepository {
   findByNamespace(namespace: string): Promise<Counter>;
   list(): Promise<Counter[]>;
   create({ id, namespace }: ICreateCounterDTO): Promise<Counter>;
-  update({ id }: IUpdateCounterDTO): Promise<UpdateResult>;
+  update({ id }: IUpdateCounterDTO): Promise<Counter>;
 }
 
 export { ICountersRepository, ICreateCounterDTO, IUpdateCounterDTO }

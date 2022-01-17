@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@shared/errors/AppError";
 import { IUsersRepository } from "@modules/account/repositories/IUsersRepository";
+import { User } from "@modules/account/infra/typeorm/entities/User";
 
 interface IRequest {
   id: string;
@@ -20,7 +21,7 @@ class UpdateUserUseCase {
     private usersRepository: IUsersRepository
   ) { }
 
-  async execute({ id, dataToUpdate }: IRequest): Promise<void> {
+  async execute({ id, dataToUpdate }: IRequest): Promise<User> {
     const { name, email, password } = dataToUpdate;
 
     const user = await this.usersRepository.findById(id);
@@ -46,7 +47,7 @@ class UpdateUserUseCase {
       user.password = hashPassword;
     }
 
-    await this.usersRepository.update({
+    return await this.usersRepository.update({
       id: user.id,
       name: user.name,
       email: user.email,

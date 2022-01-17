@@ -19,9 +19,10 @@ class UpdateUserController {
 
     const updateUserUseCase = container.resolve(UpdateUserUseCase);
 
-    await updateUserUseCase.execute({ id, dataToUpdate });
+    const user = await updateUserUseCase.execute({ id, dataToUpdate });
+    delete user.password;
 
-    return response.status(200).send();
+    return response.status(200).json(user);
   }
 }
 

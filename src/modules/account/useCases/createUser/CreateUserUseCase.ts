@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@shared/errors/AppError";
 import { IUsersRepository } from "@modules/account/repositories/IUsersRepository";
+import { User } from "@modules/account/infra/typeorm/entities/User";
 
 interface IRequest {
   name: string;
@@ -16,14 +17,16 @@ class CreateUserUseCase {
     private usersRepository: IUsersRepository
   ) { }
 
-  async execute({ name, email, password }: IRequest): Promise<void> {
+  async execute({ name, email, password }: IRequest): Promise<User> {
     const userEmailAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userEmailAlreadyExists) {
       throw new AppError("The email provided is already in use.", 422);
     }
 
-    await this.usersRepository.create({ name, email, password });
+    const user = await this.usersRepository.create({ name, email, password });
+
+    return user;
   }
 }
 

@@ -8,10 +8,9 @@ class CreateCounterController {
     const { namespace } = request.body;
 
     const createCounterUseCase = container.resolve(CreateCounterUseCase);
-
     const counter = await createCounterUseCase.execute({ namespace })
 
-    return response.json(counter);
+    return response.status(201).json(counter);
   }
 }
 

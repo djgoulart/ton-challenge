@@ -27,10 +27,12 @@ class CountersRepository implements ICountersRepository {
     return newCounter;
   }
 
-  async update({ id, hits }: IUpdateCounterDTO): Promise<UpdateResult> {
-    const updateCounter = await this.repository.update(id, { hits });
+  async update({ id, hits }: IUpdateCounterDTO): Promise<Counter> {
+    await this.repository.update(id, { hits });
 
-    return updateCounter;
+    const counter = await this.repository.findOne(id);
+
+    return counter;
   }
 
   async list(): Promise<Counter[]> {
