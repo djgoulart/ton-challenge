@@ -80,6 +80,22 @@ Abra um terminal de comando dentro da raiz do projeto e digite o comando abaixo:
 node ./dist/shared/infra/http/server.js;
 ```
 
+## Atenção aos paths e extensões de arquivos no `ormconfig.json`
+
+Para rodar o projeto a partir dos arquivos de build, atente-se para a correta configuração dos `paths`que mapeiam as entidades, migrations e cli. Eles devem estar apontando para a pasta `dist` e os arquivos possuem a extensão `.js`.
+```
+"migrations": [
+    "./dist/shared/infra/typeorm/migrations/*.js"
+  ],
+  "entities": [
+    "./dist/modules/account/infra/typeorm/entities/*.js",
+    "./dist/modules/hits/infra/typeorm/entities/*.js"
+  ],
+  "cli": {
+    "migrationsDir": "./dist/shared/infra/typeorm/migrations"
+  }
+```
+
 ## Rodando o Projeto a partir em ambiente de desenvolvimento
 
 <br>
@@ -92,23 +108,28 @@ O servidor NODE estará rodando em `localhost` na porta `3333`
 
 <br>
 
-## ☕ Building para Produção
+## Atenção aos paths e extensões de arquivos no `ormconfig.json`
 
-
-Para fazer o building use o comando:
-
+Para rodar o projeto `em ambiente de desenvolvimento`, atente-se para a correta configuração dos `paths` que mapeiam as entidades, migrations e cli do ORM. Eles devem estar apontando para a pasta `src` e os arquivos possuem a extensão `.ts`.
 ```
-`npm run build` ou `yarn build`
+"migrations": [
+    "./src/shared/infra/typeorm/migrations/*.ts"
+  ],
+  "entities": [
+    "./src/modules/account/infra/typeorm/entities/*.ts",
+    "./src/modules/hits/infra/typeorm/entities/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+  }
 ```
-Os arquivos da aplicação serão colocados em uma pasta `dist`
-localizada na raiz do projeto.
 
 ## ☕ Rodando Testes
 
-Para rodar os testes use o comando:
+Para rodar os testes após se certificar das que seu arquivo `ormconfig.json` está corretamente configurado para o `ambiente de desenvolvimento` use o comando:
 
 ```
 `npm run test` ou `yarn test`
 ```
-Por padrão os testes irão rodar utilizando um banco SQLITE armazenando todos os registros temporáriamente na memória.
+Por padrão os testes irão rodar utilizando um banco `SQLITE` armazenando todos os registros temporáriamente na memória.
 `:memory:`
