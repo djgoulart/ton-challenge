@@ -22,7 +22,7 @@ class InMemoryUsersRepository implements IUsersRepository {
     return this.users;
   }
 
-  async create({ name, email, password }: ICreateUserDTO): Promise<void> {
+  async create({ name, email, password }: ICreateUserDTO): Promise<User> {
     const user = new User();
 
     const hashPassword = await hash(password, 10);
@@ -30,13 +30,16 @@ class InMemoryUsersRepository implements IUsersRepository {
     Object.assign(user, { name, email, password: hashPassword });
 
     this.users.push(user);
+    return user;
   }
 
-  async update({ id, name, email, password }: IUpdateUserDTO): Promise<void> {
+  async update({ id, name, email, password }: IUpdateUserDTO): Promise<User> {
 
     const user = this.users.find((user) => user.id === id);
 
     Object.assign(user, { name, email, password });
+
+    return user;
   }
 
 }

@@ -9,6 +9,14 @@ interface ICreateCounter {
   namespace: string;
 }
 
+interface ICountApiResponse {
+  data: {
+    namespace: string;
+    key: string;
+    value: number;
+  }
+}
+
 @injectable()
 class CreateCounterUseCase {
 
@@ -18,19 +26,19 @@ class CreateCounterUseCase {
   ) { }
 
   async execute({ namespace }: ICreateCounter): Promise<Counter> {
+
     const namespaceAlreadyExists = await this.countersRepository.findByNamespace(namespace);
 
     if (namespaceAlreadyExists) {
       throw new AppError("Namespace already ben used", 422);
     }
 
-    const { data } = await countApi.get(`create?namespace=${namespace}`);
-    const { data: countValue } = await countApi.get(`get/${namespace}`);
+    const { data } = await countApi.get(`create?namespace=${namespace}`) as ICountApiResponse;
 
     const counter = await this.countersRepository.create({
       id: data.key,
       namespace: data.namespace,
-      hits: countValue.value
+      hits: Number(data.value)
     });
 
     return counter;

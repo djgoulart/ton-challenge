@@ -12,7 +12,7 @@ class UsersRepository implements IUsersRepository {
     this.repository = getRepository(User);
   }
 
-  async create({ name, email, password }: ICreateUserDTO): Promise<void> {
+  async create({ name, email, password }: ICreateUserDTO): Promise<User> {
 
     const hashPassword = await hash(password, 10);
 
@@ -22,11 +22,13 @@ class UsersRepository implements IUsersRepository {
       password: hashPassword
     });
 
-    await this.repository.save(user)
+    return await this.repository.save(user)
   }
 
-  async update({ id, name, email, password }: IUpdateUserDTO): Promise<void> {
+  async update({ id, name, email, password }: IUpdateUserDTO): Promise<User> {
     await this.repository.update(id, { name, email, password });
+
+    return await this.repository.findOne(id);
 
   }
 

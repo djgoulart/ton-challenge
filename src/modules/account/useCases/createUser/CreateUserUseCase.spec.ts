@@ -6,7 +6,7 @@ let createUserUseCase: CreateUserUseCase;
 let inMemoryUsersRepository: InMemoryUsersRepository;
 
 
-describe("Create_User", () => {
+describe("Create User", () => {
 
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository();

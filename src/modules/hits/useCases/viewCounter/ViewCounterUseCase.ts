@@ -28,9 +28,9 @@ class ViewCounterUseCase {
 
     const hits = data.value;
 
-    const counterHits = Object.assign({}, counter, { hits })
+    counter.hits = hits;
 
-    return counterHits;
+    return counter;
   }
 }
 
