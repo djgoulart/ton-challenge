@@ -58,28 +58,42 @@ APP_KEY=<sua_chave_de_criptografia>
 ```
 4 - Configure o arquivo `ormconfig.json` com os dados de acesso ao seu banco de dados. Siga o padrão deixado como exemplo no arquivo `ormconfig.example.json`.
 
-<br>
-
-## Rodando o Projeto em Ambiente de Dev com Docker
-
-Abra um terminal de comando dentro da raiz do projeto e digite o comando abaixo:
-```
-docker-compose up --build -d
-```
-O servidor NODE estará rodando em `localhost` na porta `3333`
+4 - Utilize o comando para fazer o build inicial da aplicação: `npm run build` ou `yarn build`. Os arquivos do build serão inseridos em uma pasta `dist` na raiz do projeto.
 
 <br>
 
 ## ☕ Criando a estrutura do banco de dados
 
 Rode as migrations para fazer a criação inicial das tabelas.
+Lembre-se, sua instância de banco de dado precisa estar rodando nessa etapa.
 
 ```
 `npm run typeorm migrations:run` ou `yarn typeorm migrations:run`
 ```
+<br>
+
+
+## Rodando o Projeto a partir do build
+
+Abra um terminal de comando dentro da raiz do projeto e digite o comando abaixo:
+```
+node ./dist/shared/infra/http/server.js;
+```
+
+## Rodando o Projeto a partir em ambiente de desenvolvimento
 
 <br>
+Abra um terminal de comando dentro da raiz do projeto e digite o comando abaixo:
+
+```
+npm run dev
+```
+O servidor NODE estará rodando em `localhost` na porta `3333`
+
+<br>
+
 ## ☕ Building para Produção
+
 
 Para fazer o building use o comando:
 
